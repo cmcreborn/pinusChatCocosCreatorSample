@@ -76,7 +76,7 @@ cc.Class({
                 if(data.port){
                     console.log("port = " + data.port);
                     that.label.string += '\ngate return port:' + data.port + '\n ip:' + data.host;
-                    connectorHost = data.host;
+                    //connectorHost = data.host; // sample chat server only one, so here no need to set host
                     connetorPort = data.port;
                     pinus.disconnect();
                 }
@@ -98,7 +98,7 @@ cc.Class({
 
         // tell connector service username, get host and port return.
         pinus.init({
-            host: connectorHost,
+            host: host,
             port: connetorPort,
             log: true
         }, function () {
