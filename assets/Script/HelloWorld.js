@@ -65,14 +65,11 @@ cc.Class({
             pinus.request(route, {
                 uid: username
             }, function (data) {
-                if (data.error) {
-                    console.log(DUPLICATE_ERROR);
+                if(data.code === 500) {
+                    console.log(LOGIN_ERROR);
+                    that.label.string += '\n' + LOGIN_ERROR;
                     return;
                 }
-                // setName();
-                // setRoom();
-                // showChat();
-                // initUserList(data);
                 console.log("data = ");
                 console.log(data);
                 // get the right ip and port, do disconnect
@@ -94,6 +91,7 @@ cc.Class({
         
         
     },
+
     onConnector: function () {
         console.log('onConnector click...');
         var that = this;
@@ -111,6 +109,7 @@ cc.Class({
             }, function (data) {
                 if (data.error) {
                     console.log(DUPLICATE_ERROR);
+                    that.label.string += '\n' + DUPLICATE_ERROR;
                     return;
                 }
                 console.log("data = ");
@@ -122,6 +121,7 @@ cc.Class({
         });
 
     },
+
     onChatSend: function () {
         console.log("onChatSend ... to All user");
         var that = this;
@@ -151,8 +151,7 @@ cc.Class({
             var user = data.user;
             console.log('onChatSend onAdd ... ');
             console.log(data);
-            // that.label.string += "\n" + user;
-            // users = data.user;
+            that.label.string += "\nuser onAdd :" + user;
         });
 
         //update user list
@@ -160,15 +159,11 @@ cc.Class({
             var user = data.user;
             console.log('onChatSend onLeave ... ');
             console.log(data);
-            // that.label.string += "\n" + user;
-            // users = data.user;
+            that.label.string += "\nuser onLeave :" + user;
         });
 
     },
     
-    showError: function (content) {
-        this.label.string = content;
-    },
 });
 
 
