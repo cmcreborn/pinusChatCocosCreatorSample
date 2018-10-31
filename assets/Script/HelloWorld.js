@@ -97,6 +97,7 @@ cc.Class({
     onConnector: function () {
         console.log('onConnector click...');
         var that = this;
+
         // tell connector service username, get host and port return.
         pinus.init({
             host: connectorHost,
@@ -119,22 +120,6 @@ cc.Class({
                 
             });
         });
-        //wait message from the server.
-        pinus.on('onChat', function (data) {
-            var user = data.user;
-            console.log('connector onChat ... ');
-            console.log(data);
-            //that.label.string += "\n" + user;
-        });
-
-        //update user list
-        pinus.on('onAdd', function (data) {
-            var user = data.user;
-            console.log('connector onAdd ... ');
-            console.log(data);
-            that.label.string += "\n" + user;
-            users = data.user;
-        });
 
     },
     onChatSend: function () {
@@ -142,6 +127,7 @@ cc.Class({
         var that = this;
         console.log("chat Msg = " + that.chatMsgLabel.string);
         var chatRoute = "chat.chatHandler.send";
+
         pinus.request(chatRoute, {
             rid: rid,
             content: that.chatMsgLabel.string,
@@ -151,6 +137,7 @@ cc.Class({
             console.log("onChatSend ...  chat.chatHandler.send get = ");
             console.log(data);
         });
+
         //wait message from the server.
         pinus.on('onChat', function (data) {
             var user = data.user;
@@ -159,41 +146,26 @@ cc.Class({
             that.label.string += "\n" + data.from + " said: " + data.msg;
         });
 
-    },
-    queryEntry: function (uid, callback) {
-        var route = 'gate.gateHandler.queryEntry';
-        pinus.init({
-            host: host,
-            port: 3014,
-            log: true
-        }, function() {
-            pinus.request(route, {
-                uid: uid
-            }, function(data) {
-                pinus.disconnect();
-                if(data.code === 500) {
-                    showError(LOGIN_ERROR);
-                    return;
-                }
-                console.log('queryEntry ......get data = ');
-                console.log(data);
-                callback(data.host, data.port);
-            });
-        });
-        //wait message from the server.
-        pinus.on('onChat', function (data) {
-            console.log('pinus onChat ...');
+        //update user list
+        pinus.on('onAdd', function (data) {
+            var user = data.user;
+            console.log('onChatSend onAdd ... ');
             console.log(data);
-            // addMessage(data.from, data.target, data.msg);
-            // $("#chatHistory").show();
-            // if (data.from !== username)
-            //     tip('message', data.from);
+            // that.label.string += "\n" + user;
+            // users = data.user;
         });
-        pinus.on('disconnect', function(reason) {
-            console.log("pinus disconnect");
+
+        //update user list
+        pinus.on('onLeave', function (data) {
+            var user = data.user;
+            console.log('onChatSend onLeave ... ');
+            console.log(data);
+            // that.label.string += "\n" + user;
+            // users = data.user;
         });
-        
+
     },
+    
     showError: function (content) {
         this.label.string = content;
     },
