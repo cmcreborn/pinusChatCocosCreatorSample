@@ -1,6 +1,8 @@
 # 目的
 pinus 簡易聊天 sample 的客戶端, 使用CocosCreator 2.0.4
 
+pinus server專案以 websocket 建立
+
 # Server Side
 使用 pinus框架, clone 官方 pinus chat sample 或
 直接 clone https://github.com/cmcreborn/pinusChatSample
