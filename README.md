@@ -27,7 +27,7 @@ APP : Android 8.0/ iOS 12.0
 5. SendMsg: 傳送路由 chat.chatHandler.send
 
 # 執行畫面
-![image](https://demo.newingtech.co.uk/wp-content/uploads/2018/10/%E8%9E%A2%E5%B9%95%E5%BF%AB%E7%85%A7-2018-11-01-%E4%B8%8B%E5%8D%882.59.49-1024x573.png)
+![image](https://github.com/cmcreborn/pinusChatCocosCreatorSample/blob/master/螢幕快照%202018-11-01%20下午2.59.49.png)
 
 
 
