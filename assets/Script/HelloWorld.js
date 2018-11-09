@@ -42,6 +42,37 @@ cc.Class({
     // use this for initialization
     onLoad: function () {
         this.label.string = this.text;
+        var that = this;
+
+        //wait message from the server.
+        pinus.on('onChat', function (data) {
+            var user = data.user;
+            console.log('onChatSend onChat ... ');
+            console.log(data);
+            that.label.string += "\n" + data.from + " said: " + data.msg;
+        });
+
+        //update user list
+        pinus.on('onAdd', function (data) {
+            var user = data.user;
+            console.log('onChatSend onAdd ... ');
+            console.log(data);
+            that.label.string += "\nuser onAdd :" + user;
+        });
+
+        //update user list
+        pinus.on('onLeave', function (data) {
+            var user = data.user;
+            console.log('onChatSend onLeave ... ');
+            console.log(data);
+            that.label.string += "\nuser onLeave :" + user;
+        });
+
+        pinus.on('disconnect', function(reason) {
+            console.log("pinus onLogin disconnect");
+            console.log(reason);
+        });
+
     },
 
     // called every frame
@@ -83,10 +114,7 @@ cc.Class({
             });
         });
 
-        pinus.on('disconnect', function(reason) {
-            console.log("pinus onLogin disconnect");
-            console.log(reason);
-        });
+        
         
         
         
@@ -138,29 +166,7 @@ cc.Class({
             console.log(data);
         });
 
-        //wait message from the server.
-        pinus.on('onChat', function (data) {
-            var user = data.user;
-            console.log('onChatSend onChat ... ');
-            console.log(data);
-            that.label.string += "\n" + data.from + " said: " + data.msg;
-        });
-
-        //update user list
-        pinus.on('onAdd', function (data) {
-            var user = data.user;
-            console.log('onChatSend onAdd ... ');
-            console.log(data);
-            that.label.string += "\nuser onAdd :" + user;
-        });
-
-        //update user list
-        pinus.on('onLeave', function (data) {
-            var user = data.user;
-            console.log('onChatSend onLeave ... ');
-            console.log(data);
-            that.label.string += "\nuser onLeave :" + user;
-        });
+        
 
     },
     
